@@ -3,14 +3,14 @@ import config from "../config/config.js";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
-  client = new this.Client();
+  client = new Client();
   account;
   constructor() {
     this.client.setEndpoint(config.appwriteurl).setProject(config.projectId);
     this.account = new Account(this.client );
   }
 
-  async createAcchount({ email, password, name }) {
+  async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
         ID.unique(),
@@ -33,21 +33,19 @@ export class AuthService {
         email,
         password,
       });
-      if(result){
-        return result
-      }
-      // eslint-disable-next-line no-unused-vars
+      return result;
     } catch (error) {
       throw error;
     }
   }
-  async getcurretUser (){
+  async getCurrentUser() {
     try {
-        return await this.account.get()
+        const user = await this.account.get();
+        return user;
     } catch (error) {
-        console.log("appwrite error", error)
+        // Expected for guest users - silently return null
+        return null;
     }
-    return null;
   }
   async logout(){
     try {

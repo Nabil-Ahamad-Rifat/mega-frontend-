@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authService from "../appWrite/auth";
-import Login from "./Login";
+import { login } from "../store/authslice";
 import Logo from "./Logo";
 import Input from "./Input";
-import { useFrom } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Button from "./Button";
 
 function Signup() {
-  const navigatir = useNavigate();
+  const navigate = useNavigate();
   const [error, seterror] = useState();
   const dispatch = useDispatch();
-  const { register, handelsubmit } = useFrom();
+  const { register, handleSubmit } = useForm();
 
   const create = async (data) => {
     seterror("");
@@ -21,8 +21,8 @@ function Signup() {
       if (Userdata) {
         const userData = await authService.getCurrentUser();
         if (userData) {
-          dispatch(Login(userData));
-          navigatir("/");
+          dispatch(login({ userData }));
+          navigate("/");
         }
       }
     } catch (error) {
@@ -52,10 +52,10 @@ function Signup() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handelsubmit(create)}>
+        <form onSubmit={handleSubmit(create)}>
           <div className="space-y-5">
             <Input
-              lable="full Name"
+              label="full Name"
               placeholder="Enter your full name"
               {...register("name", { required: true })}
             />
@@ -66,8 +66,7 @@ function Signup() {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value:
-                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                   message: "Enter a valid email address",
                 },
               })}
@@ -76,7 +75,7 @@ function Signup() {
             <Input
             type='password'
             placeholder="Password"
-            lable="Password"
+            label="Password"
             {...register("password",{required:true})}
             />
             {/* button for submit  */}

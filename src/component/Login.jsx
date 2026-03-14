@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
-import service from "../appWrite/configAp";
 import { login as authlogin } from "../store/authslice";
-import { Button, input, Logo, logo } from "./index";
+import { Button, Input, Logo } from "./index";
 import authService from "../appWrite/auth";
-import { useFrom } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 function Login() {
-  const navigator = useNavigate();
-  const dispathch = useDispatch();
-  const { register, handelSubmit } = useFrom();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
   const [error, seterror] = useState();
-  const [loading, setloading] = useState(false);
   const login = async (data) => {
     seterror("");
     try {
@@ -20,8 +18,8 @@ function Login() {
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
-          dispathch(authlogin(userData));
-          navigator("/");
+          dispatch(authlogin({ userData }));
+          navigate("/");
         }
       }
     } catch (error) {
@@ -53,23 +51,22 @@ function Login() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handelSubmit(login)} className="mt-8">
+        <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className=" space-y-5">
-            <input
+            <Input
               type="email"
               placeholder="Enter your email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value:
-                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                   message: "Enter a valid email address",
                 },
               })}
             />
-            <input
+            <Input
               type="password"
-              lable="password"
+              label="password"
               placeholder=" Enter your password"
               {...register("password", {
                 required: true,

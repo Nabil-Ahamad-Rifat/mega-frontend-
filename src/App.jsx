@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "./appWrite/auth";
 import { login, logout } from "./store/authslice";
@@ -24,7 +25,7 @@ function App() {
       .finally(() => {
         setloading(false);
       });
-  }, []);
+  }, [dispatch]);
   if (loading) {
     return (
       <h1 className="min-h-screen flex text-6xl items-center text-center justify-center">
@@ -36,7 +37,7 @@ function App() {
       <div className="min-h-screen bg-gray-500  ">
         <div className="w-full block">
           <Header />
-          Todo :<outlate/>{/* todo : outlate  */}
+          <Outlet />{/* todo : outlet  */}
           <Footer />
           <Logoutbtn />
         </div>

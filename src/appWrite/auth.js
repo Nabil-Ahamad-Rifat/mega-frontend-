@@ -42,7 +42,7 @@ export class AuthService {
     try {
         const user = await this.account.get();
         return user;
-    } catch (error) {
+    } catch {
         // Expected for guest users - silently return null
         return null;
     }

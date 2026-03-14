@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 export default function Protected({children, authentication}) {
     const [loader, setloader] = useState(true)
     const authstatus = useSelector(state =>state.auth.status);
-    const dispatch = useDispatch()
     const navigator =useNavigate()
 
     useEffect(()=>{
@@ -15,6 +14,7 @@ export default function Protected({children, authentication}) {
         }else if(!authentication && authstatus !==authentication){
             navigator("/")
         }
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setloader(false)
     },
     [navigator,authentication,authstatus])

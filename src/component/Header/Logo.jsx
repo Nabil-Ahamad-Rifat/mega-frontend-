@@ -1,18 +1,9 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import authService from '../../appWrite/auth';
-
-
-function logo() {
-    const dispatch = useDispatch();
-    const logout = () =>{
-        authService.logout().then(()=>{
-            dispatch(log)
-        })
-    }
+function Logo({ width = "100px" }) {
   return (
-    <div>logo</div>
+    <div style={{ width }}>
+      Logo
+    </div>
   )
 }
 
-export default logo
+export default Logo;

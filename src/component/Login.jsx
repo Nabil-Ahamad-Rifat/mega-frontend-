@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
 import service from "../appWrite/configAp";
 import { login as authlogin } from "../store/authslice";
-import { Button, input, Logo, logo } from "./index";
+import { Button, Input, Logo } from "./index";
 import authService from "../appWrite/auth";
-import { useFrom } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 function Login() {
   const navigator = useNavigate();
   const dispathch = useDispatch();
-  const { register, handelSubmit } = useFrom();
+  const { register, handleSubmit } = useForm();
   const [error, seterror] = useState();
   const [loading, setloading] = useState(false);
   const login = async (data) => {

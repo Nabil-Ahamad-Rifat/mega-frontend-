@@ -9,10 +9,12 @@ import signup from "../pages/signup";
 import Login from "./Login";
 import PostCard from "./PostCard";
 import PostFrom from "./post-from/PostFrom";
+import AuthLayout from "./AuthLayout"
 
 export {
   Header,
   PostFrom,
+  AuthLayout,
   signup,
   Login,
   PostCard,

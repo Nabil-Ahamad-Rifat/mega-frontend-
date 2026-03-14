@@ -74,7 +74,7 @@ export class Service {
     try {
         return await this.bucket.createFile(
             config.bucketId,
-            ID.unicue(),
+            ID.unique(),
             file
         )
         

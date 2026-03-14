@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
-import { useForm, Watch } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Button, Input, Select, Rte } from "../index";
 import service from "../../appWrite/configAp";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostFrom(post) {
-  const { register, handlSubmit, watch, setValue, control, getValues } =
+  const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: { title: post?.title || "", slug: post?.slug || "" },
       content: post.content || "",
@@ -53,7 +53,7 @@ function PostFrom(post) {
     return "";
   }, []);
 
-  const subscription = Watch(
+  const subscription = useWatch(
     (value, { name }) => {
       if (name === "title") {
         setValue("slug", slugTransform(value.title, { shouldValidate: true }));

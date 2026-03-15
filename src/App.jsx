@@ -37,9 +37,8 @@ function App() {
       <div className="min-h-screen bg-gray-500  ">
         <div className="w-full block">
           <Header />
-          <Outlet />{/* todo : outlet  */}
+         <Outlet/>
           <Footer />
-          <Logoutbtn />
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ function Login() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, seterror] = useState();
-  const login = async (data) => {
+  const loginhandeler  = async (data) => {
     seterror("");
     try {
       const session = await authService.login(data);
@@ -51,9 +51,10 @@ function Login() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handleSubmit(login)} className="mt-8">
+        <form onSubmit={handleSubmit(loginhandeler)} className="mt-8">
           <div className=" space-y-5">
             <Input
+              label="Email"
               type="email"
               placeholder="Enter your email"
               {...register("email", {
@@ -72,7 +73,7 @@ function Login() {
                 required: true,
               })}
             />
-            <Button> sign in</Button>
+            <Button type="submit" className="w-full">Sign in</Button>
           </div>
         </form>
       </div>

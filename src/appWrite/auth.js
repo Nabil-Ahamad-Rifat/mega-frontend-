@@ -29,10 +29,10 @@ export class AuthService {
   }
   async login({ email, password }) {
     try {
-      const result = await this.account.createEmailPasswordSession({
+      const result = await this.account.createEmailPasswordSession(
         email,
-        password,
-      });
+        password
+      );
       return result;
     } catch (error) {
       throw error;

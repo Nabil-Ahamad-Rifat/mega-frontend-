@@ -60,7 +60,8 @@ function Signup() {
               {...register("name", { required: true })}
             />
             {/* email input form */}
-            <input
+            <Input
+              label="Email"
               type="email"
               placeholder="Enter your email"
               {...register("email", {
@@ -79,7 +80,7 @@ function Signup() {
             {...register("password",{required:true})}
             />
             {/* button for submit  */}
-            <Button type="submit"/>
+            <Button type="submit" className="w-full">Create Account</Button>
           </div>
         </form>
       </div>

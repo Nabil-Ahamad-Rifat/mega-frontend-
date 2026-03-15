@@ -27,14 +27,14 @@ function Header() {
     {
       name: "all Posts",
       slug: "/all-posts",
-      active: !authStatus,
+      active: authStatus,
     },
     {
       name: "add post",
       slug: "/add-post",
-      active: !authStatus,
+      active: authStatus,
     },
-    { name: "profile", slug: "/profile", active: !authStatus },
+    { name: "profile", slug: "/profile", active: authStatus },
   ];
   return (
     <header className="py-3 shadow bg-gray-500">

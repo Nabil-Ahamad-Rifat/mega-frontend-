@@ -11,7 +11,7 @@ export class Service {
     this.database = new Databases(this.client);
     this.bucket = new Storage(this.client);
   }
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({ title, slug, content, feturedimg, status, userId }) {
     try {
       return await this.database.createDocument(
         config.databaseId,
@@ -20,7 +20,7 @@ export class Service {
         {
           title,
           content,
-          featuredImage,
+          feturedimg,
           status,
           userId,
         },
@@ -29,7 +29,7 @@ export class Service {
       console.log("appWrite error", error);
     }
   }
-  async updatePost(slug, { title, content, featuredImage, status}) {
+  async updatePost(slug, { title, content, feturedimg, status}) {
     try {
       return await this.database.updateDocument(
         config.databaseId,
@@ -38,7 +38,7 @@ export class Service {
         {
           title,
           content,
-          featuredImage,
+          feturedimg,
           status
         },
       );

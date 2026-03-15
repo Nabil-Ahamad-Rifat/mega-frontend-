@@ -8,9 +8,12 @@ import { useSelector } from "react-redux";
 function PostFrom({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
-      defaultValues: { title: post?.title || "", slug: post?.slug || "" },
-      content: post.content || "",
-      status: post?.status || "active",
+      defaultValues: {
+        title: post?.title || "",
+        slug: post?.slug || "",
+        content: post?.content || "",
+        status: post?.status || "active",
+      },
     });
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
@@ -18,12 +21,12 @@ function PostFrom({ post }) {
     if (post && post.$id) {
       const file = data.image[0] ? await service.uploadImage(data.image[0]) : null;
       if (file) {
-        service.deleteFile(post.featuredImage);
+        service.deleteFile(post.feturedimg);
       }
 
       const dbPost = await service.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
+        feturedimg: file ? file.$id : undefined,
       });
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
@@ -31,7 +34,7 @@ function PostFrom({ post }) {
     } else {
       const file = data.image[0] ? await service.uploadImage(data.image[0]) : null;
       if (file) {
-        data.featuredImage = file.$id;
+        data.feturedimg = file.$id;
         const dbpost = await service.createPost({
           ...data,
           userId: userData.$id,
@@ -107,7 +110,7 @@ function PostFrom({ post }) {
           {post && (
             <div className="w-full mb-4 ">
               <img
-                src={service.getFilePreview(post.featuredImage)}
+                src={service.getFilePreview(post.feturedimg)}
                 alt={post.title}
                 className="rounded-lg"
               />
